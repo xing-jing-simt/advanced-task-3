@@ -1,0 +1,29 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress
+  annotations:
+    kubernetes.io/ingress.class: kong
+    konghq.com/strip-path: "true"
+    konghq.com/plugins: twelve-per-min
+spec:
+  ingressClassName: kong
+  rules:
+    - http:
+        paths:
+          - path: /task
+            pathType: Prefix
+            backend:
+              service:
+                name: task-1
+                port:
+                  number: 80
+---
+apiVersion: configuration.konghq.com/v1
+kind: KongPlugin
+metadata:
+  name: twelve-per-min
+config:
+  minute: 12
+  policy: local
+plugin: rate-limiting
