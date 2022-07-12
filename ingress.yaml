@@ -11,11 +11,18 @@ spec:
   rules:
     - http:
         paths:
-          - path: /task
+          - path: /cart
             pathType: Prefix
             backend:
               service:
-                name: task-1
+                name: cart
+                port:
+                  number: 80
+          - path: /order
+            pathType: Prefix
+            backend:
+              service:
+                name: order
                 port:
                   number: 80
 ---
