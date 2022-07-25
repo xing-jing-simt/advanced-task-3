@@ -3,26 +3,17 @@ kind: Ingress
 metadata:
   name: ingress
   annotations:
-    kubernetes.io/ingress.class: kong
-    konghq.com/strip-path: "true"
     konghq.com/plugins: twelve-per-min
 spec:
   ingressClassName: kong
   rules:
     - http:
         paths:
-          - path: /cart
+          - path: /task
             pathType: Prefix
             backend:
               service:
-                name: cart
-                port:
-                  number: 80
-          - path: /order
-            pathType: Prefix
-            backend:
-              service:
-                name: order
+                name: task-1
                 port:
                   number: 80
 ---
